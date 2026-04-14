@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cfliunq2oiaml"]
 
 [ext_resource type="PackedScene" uid="uid://dsj5hdyeu8sbs" path="res://character.tscn" id="1_rnpve"]
+[ext_resource type="PackedScene" uid="uid://cnfdpk0ys4c1v" path="res://box_phys.tscn" id="2_p20re"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rnpve"]
 
@@ -10,8 +11,6 @@ sky_material = SubResource("ProceduralSkyMaterial_rnpve")
 [sub_resource type="Environment" id="Environment_m2sqd"]
 background_mode = 2
 sky = SubResource("Sky_p20re")
-
-[sub_resource type="BoxMesh" id="BoxMesh_rnpve"]
 
 [node name="World" type="Node3D" unique_id=1154788938]
 
@@ -29,6 +28,6 @@ environment = SubResource("Environment_m2sqd")
 transform = Transform3D(1, 0, 0, 0, 0.2619702, 0.96507597, 0, -0.96507597, 0.2619702, 0, 0, 0)
 shadow_enabled = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=825403766]
-transform = Transform3D(1.9411318, 0, 0, 0, 1, 0, 0, 0, 2.0411224, -4.784727, 2.1181493, 1.8111475)
-mesh = SubResource("BoxMesh_rnpve")
+[node name="BoxPhys" parent="." unique_id=1934599577 instance=ExtResource("2_p20re")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6870137, 0.39607, 1.6218458)
+mass = 4.281

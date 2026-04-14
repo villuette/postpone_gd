@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-TreeWatcher="*uid://byto6ql37kfie"
+GlobalSettings="*uid://4d8gbg5k1t7x"
 
 [editor_plugins]
 
