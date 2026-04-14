@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://cfliunq2oiaml"]
+
+[ext_resource type="PackedScene" uid="uid://dsj5hdyeu8sbs" path="res://character.tscn" id="1_rnpve"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rnpve"]
+
+[sub_resource type="Sky" id="Sky_p20re"]
+sky_material = SubResource("ProceduralSkyMaterial_rnpve")
+
+[sub_resource type="Environment" id="Environment_m2sqd"]
+background_mode = 2
+sky = SubResource("Sky_p20re")
+
+[sub_resource type="BoxMesh" id="BoxMesh_rnpve"]
+
+[node name="World" type="Node3D" unique_id=1154788938]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1806618205]
+transform = Transform3D(22.624027, 0, 0, 0, 0.4358678, 0, 0, 0, 18.827234, 0, -1.0645621, 0)
+use_collision = true
+
+[node name="Player" parent="." unique_id=2137134564 instance=ExtResource("1_rnpve")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45915663, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=957042484]
+environment = SubResource("Environment_m2sqd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=745841293]
+transform = Transform3D(1, 0, 0, 0, 0.2619702, 0.96507597, 0, -0.96507597, 0.2619702, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=825403766]
+transform = Transform3D(1.9411318, 0, 0, 0, 1, 0, 0, 0, 2.0411224, -4.784727, 2.1181493, 1.8111475)
+mesh = SubResource("BoxMesh_rnpve")
