@@ -1,46 +1,28 @@
-# Project: Postpone
+# Tales of Tonsolitsia: Post Pone
 
-Прототип шутера от первого лица на движке **Godot 4.x (Forward Mobile)**. Проект ориентирован на механики управления состоянием (HP, Mind, Stamina) и модульную настройку через внутриигровое меню.
+Дебютный проект: 3D FPS-шутер с элементами RPG и детектива в сеттинге ретро-футуризма.
 
-## 🛠 Tech Stack
-* **Engine:** Godot 4.x (Forward Mobile)
-* **OS:** Debian Sid (Unstable / Trixie)
-* **Hardware:** NVIDIA GTX 1650 (4GB VRAM)
-* **Python Stack:** `uv` (project management), `PyTorch`
-* **Shell/CLI:** Zsh (Antidote + P10k), `zoxide`, `fzf-tab`
-* **Tools:** `eza`, `bat`, `ripgrep`, `fd`
-* **Editors:** `micro` (CLI), `Zed` / `Alacritty`
+## 🌟 Особенности
+* **Детективная составляющая:** поиск улик, слежка и дедукция.
+* **Механика болезни:** визуальные и звуковые искажения, требующие контроля через препараты.
+* **Уникальный арсенал:** два типа урона и противники с соответствующими резистами.
+* **Атмосфера:** авторский стиль, вдохновленный Dishonored и Deadlock.
 
-## 🕹 Key Mechanics
-* **Hybrid Stat System:**
-    * `Mind` & `Health`: Логические "тики" урона раз в секунду. Сначала истощается ментальное состояние, затем — здоровье.
-    * `Stamina`: Плавный расход при беге и регенерация в реальном времени (`delta`-based).
-* **Vignette System:** Динамическое покраснение экрана при низком уровне здоровья (пульсация через `Tween`).
-* **Global Input:** Управление паузой через независимый от игрока UI-слой (`Process Mode: Always`).
-* **Smooth UI:** Анимированные прогресс-бары с использованием `StyleBoxFlat` и интерполяции `Tween`.
+## 🏗 Структура проекта
+* `/src` — логика интерфейса (HUD, шкалы состояния, меню паузы).
+* `/assets` — графические ресурсы, текстуры и шейдеры для эффектов искажения (виньетки).
 
-## 🚀 Installation & Running
-Для работы в окружении Debian Sid:
+## 🚀 Установка и запуск
 
+### Из исходников
 1. Склонируйте репозиторий:
     ```bash
-    git clone <repo_url>
-    cd <project_dir>
+    git clone [https://github.com/villuette/postpone_gd/](https://github.com/villuette/postpone_gd/)
+    cd postpone_gd
     ```
-2. Открытие проекта в Godot:
-    ```bash
-    godot4 --editor project.godot
-    ```
+2. Откройте папку проекта в **Godot Engine**.
 
-
-## 🏗 Project Structure
-* `/src`: HUD, VBoxContainer со шкалами, меню паузы.
-* `/assets`: Текстуры, градиенты для виньетки.
-
-## 📋 TODO
-- [ ] Система инвентаря.
-- [ ] Реализация полноценного цикла смерти.
-- [ ] AI Агенты (MCP) и Rust-модули.
-
-## 📜 License
--
+## 🛠 Технологии
+* **Engine:** Godot 4
+* **Language:** GDScript / Rust (GDExtension)
+* **Style:** Retro-futurism / Sci-Fi
