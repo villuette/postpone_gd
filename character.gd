@@ -1,50 +1,133 @@
 extends CharacterBody3D
 
 var settings = {
-	"video": {
+	"video":
+	{
 		"fullscreen": true,
 		"fov": 75,
 	},
-	"audio": {
+	"audio":
+	{
 		"master_volume": 0.8,
 		"sfx_volume": 1.0,
 	},
-	"controls": {
+	"controls":
+	{
 		"sensitivity": 0.003,
 	},
 }
 
-const SPEED = 5.0
+const WALK_SPEED = 5.0
+const RUN_SPEED = WALK_SPEED * 1.8
+var current_speed = WALK_SPEED
 const JUMP_VELOCITY = 4.5
-var SENSITIVITY = 0.003 # Чувствительность мыши
+var SENSITIVITY = 0.003  # Чувствительность мыши
 @onready var camera = $Camera3D
 @onready var ray_cast = $Camera3D/RayCast3D
-@onready var menu = $player_ui/Control/Menu
+@onready var menu = $player_ui/Menu
+#stats bars
+@onready var stats = $player_ui/HUD/stats
+
+@onready var health_bar = $player_ui/HUD/stats/health
+@onready var stamina_bar = $player_ui/HUD/stats/stamina
+@onready var mind_bar = $player_ui/HUD/stats/mind
+@onready var damage_overlay = $player_ui/HUD/DamageOverlay  # Путь к твоему красному прямоугольнику
+var tick_timer = 0.0
+var decay_per_tick = 5.0  # Сколько отнимаем за один раз
+
+const MAX_HEALTH = 100
+const MAX_MIND = 100
+const MAX_STAMINA = 100
+
+var mind = MAX_MIND
+var health = MAX_HEALTH
+var stamina = MAX_STAMINA
+
+var stamina_drain_speed = 40.0  # Уходит за сек при беге
+var stamina_regen_speed = 5.0  # Копится за сек при отдыхе
+var is_running = false
 
 
-func _process(_delta):
-	if Input.is_action_just_pressed("ui_cancel"): # По умолчанию это клавиша Esc
-		toggle_menu()
+func _do_logic_tick():
+	if mind > 0:
+		mind -= decay_per_tick
+		if mind < 0:
+			mind = 0
+		_animate_bar(mind_bar, mind)
+	elif health > 0:
+		# Если начали терять здоровье — проявляем красный экран
+		_show_damage_vignette()
+		health -= decay_per_tick
+		if health < 0:
+			health = 0
+		_animate_bar(health_bar, health)
+
+		if health <= 0:
+			pass  #TODO die
 
 
-func toggle_menu():
-	# Инвертируем видимость меню
-	menu.visible = !menu.visible
-	if menu.visible:
-		# Прямой вызов функции из скрипта меню:
-		menu.build_menu(self)
-		# Показываем мышь и разрешаем ей двигаться свободно
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+func _show_damage_vignette():
+	var tween = create_tween()
+	# Делаем экран чуть красным (альфа 0.3) и сразу уводим назад
+	damage_overlay.modulate.a = 0.3
+	tween.tween_property(damage_overlay, "modulate:a", 0.0, 0.8)
 
+
+func _animate_bar(bar: ProgressBar, new_value: float):
+	# Создаем временную анимацию для свойства "value"
+	var tween = create_tween()
+	# Анимируем за 0.5 сек, чтобы к следующему тику полоска уже пришла в норму
+	tween.tween_property(bar, "value", new_value, 0.5).set_trans(Tween.TRANS_SINE).set_ease(
+		Tween.EASE_OUT
+	)
+
+
+func _process(delta):
+	tick_timer += delta
+
+	#stamina waste/regeneration
+	if is_running and velocity.length() > 0.1:
+		stamina -= stamina_drain_speed * delta
 	else:
-		# Возвращаем мышь в игру
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		stamina += stamina_regen_speed * delta
+
+	stamina = clamp(stamina, 0, MAX_STAMINA)
+	stamina_bar.value = stamina
+
+	if tick_timer >= 1.0:
+		_do_logic_tick()
+		tick_timer = 0.0  # Сброс накопленного времени
+
+
+func open_esc_menu():
+	# Инвертируем видимость меню
+	menu.visible = true
+	stats.visible = false
+	get_tree().paused = true
+	# Прямой вызов функции из скрипта меню:
+	menu.build_menu(self)
+	# Показываем мышь и разрешаем ей двигаться свободно
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+
+func close_esc_menu():
+	menu.visible = false
+	stats.visible = true
+	get_tree().paused = false
+	get_viewport().set_input_as_handled()
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
 func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		open_esc_menu()
 	# Проверь, что в Input Map настроено действие "shoot" (ЛКМ)
 	if event.is_action_pressed("shoot"):
 		shoot()
+	if event.is_action_pressed("run"):
+		is_running = true
+	if event.is_action_released("run"):
+		is_running = false
 
 
 func shoot():
@@ -67,7 +150,7 @@ func shoot():
 		target.apply_impulse(direction * 10.0, point - target.global_position)
 
 
-# Вынесем создание искры в отдельный метод, чтобы не засорять shoot()
+#
 func create_spark(pos: Vector3):
 	var spark = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
@@ -83,17 +166,19 @@ func create_spark(pos: Vector3):
 
 
 func _ready():
+	# Инициализация значений полосы здоровья, ментального состояния и выносливости
+
+	health_bar.max_value = MAX_HEALTH
+	mind_bar.max_value = MAX_MIND
+	stamina_bar.max_value = MAX_STAMINA
+
+	health_bar.value = health
+	mind_bar.value = mind
+	stamina_bar.value = stamina
+
 	# Захватываем мышь при старте игры
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	SENSITIVITY = GlobalSettings.settings_data["Sensitivity"]["val"]
-
-
-func _update_setting(key, value):
-	# Обновляем в глобале
-	GlobalSettings.update_setting(key, value)
-	# И если это чуйка, обновляем локально у персонажа
-	if key == "Sensitivity":
-		SENSITIVITY = value
 
 
 func _unhandled_input(event):
@@ -108,6 +193,14 @@ func _unhandled_input(event):
 
 
 func _physics_process(delta: float) -> void:
+	# Если стамина кончилась, выключаем бег принудительно
+	if stamina <= 0:
+		is_running = false
+	# Смена скорости
+	if is_running:
+		current_speed = RUN_SPEED
+	else:
+		current_speed = WALK_SPEED
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -121,10 +214,10 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = direction.x * current_speed
+		velocity.z = direction.z * current_speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, current_speed)
+		velocity.z = move_toward(velocity.z, 0, current_speed)
 
 	move_and_slide()
