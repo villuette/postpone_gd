@@ -24,5 +24,5 @@
 
 ## 🛠 Технологии
 * **Engine:** Godot 4
-* **Language:** GDScript / Rust (GDExtension)
+* **Language:** GDScript
 * **Style:** Retro-futurism / Sci-Fi
