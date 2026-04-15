@@ -1,0 +1,9 @@
+# Normalize EOL for all files that Git considers text files.
+* text=auto eol=lf
+
+# Закинуть ВООБЩЕ ВСЁ из папки assets в LFS
+assets/** filter=lfs diff=lfs merge=lfs -text
+
+# НО: исключить текстовые ресурсы Godot, чтобы работал diff
+assets/**/*.tres -filter -merge text
+assets/**/*.tscn -filter -merge text

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://h0ul8l83pr6k"]
 
 [ext_resource type="Script" uid="uid://bu3vqwo3ej51w" path="res://src/esc_menu.gd" id="1_lwipk"]
+[ext_resource type="PackedScene" uid="uid://b2vaii0b0fe6i" path="res://src/Inventory.tscn" id="2_tavnm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lwipk"]
 bg_color = Color(0.21016532, 0.0068337694, 0.010960172, 1)
@@ -167,3 +168,6 @@ offset_left = 103.0
 offset_top = 86.0
 offset_right = 415.0
 offset_bottom = 501.0
+
+[node name="Inventory" parent="." unique_id=771640842 instance=ExtResource("2_tavnm")]
+visible = false

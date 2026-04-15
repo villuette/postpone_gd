@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://md3mla31tmbf"]
+
+[node name="InventorySlot" type="PanelContainer" unique_id=1720966037]
+custom_minimum_size = Vector2(50, 50)
+anchors_preset = -1
+offset_right = 23.0
+offset_bottom = 23.0
+
+[node name="Icon" type="TextureRect" parent="." unique_id=2019183300]
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CountLabel" type="Label" parent="." unique_id=538285699]
+layout_mode = 2
+horizontal_alignment = 2
+vertical_alignment = 2
