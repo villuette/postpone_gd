@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://cfliunq2oiaml"]
+
+[ext_resource type="PackedScene" uid="uid://dsj5hdyeu8sbs" path="res://src/character.tscn" id="1_rnpve"]
+[ext_resource type="PackedScene" uid="uid://cnfdpk0ys4c1v" path="res://src/box_phys.tscn" id="2_p20re"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rnpve"]
+sky_top_color = Color(0.16474998, 0.20500857, 0.25863782, 1)
+sky_horizon_color = Color(0.09357732, 0.096370704, 0.101963885, 1)
+sky_curve = 0.15529011
+ground_bottom_color = Color(0.16059509, 0.19751948, 0.18526968, 1)
+ground_horizon_color = Color(0.01062752, 0.011116987, 0.012135965, 1)
+ground_curve = 0.0070710825
+
+[sub_resource type="Sky" id="Sky_p20re"]
+sky_material = SubResource("ProceduralSkyMaterial_rnpve")
+
+[sub_resource type="Environment" id="Environment_m2sqd"]
+background_mode = 2
+sky = SubResource("Sky_p20re")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_p20re"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_p20re"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[node name="World" type="Node3D" unique_id=1154788938]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1806618205]
+transform = Transform3D(22.624027, 0, 0, 0, 0.4358678, 0, 0, 0, 18.827234, 0, -1.0645621, 0)
+use_collision = true
+
+[node name="Player" parent="." unique_id=2137134564 instance=ExtResource("1_rnpve")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45915663, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=957042484]
+environment = SubResource("Environment_m2sqd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=745841293]
+transform = Transform3D(1, 0, 0, 0, 0.2619702, 0.96507597, 0, -0.96507597, 0.2619702, 0, 0, 0)
+light_color = Color(0.48178947, 0.48178947, 0.48178947, 1)
+shadow_enabled = true
+
+[node name="BoxPhys" parent="." unique_id=1934599577 instance=ExtResource("2_p20re")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6201259, 0.7447741, -5.522161)
+mass = 4.281
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1876614057]
+transform = Transform3D(-6.035197, 0, 8.742278e-08, 5.276137e-07, -4.371139e-08, 1, 2.3062725e-14, 1, 4.371139e-08, -0.95936656, 0.1181283, -7.525512)
+mesh = SubResource("PlaneMesh_p20re")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=467132266]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=1479798653]
+shape = SubResource("ConcavePolygonShape3D_p20re")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=289278498]
+transform = Transform3D(6.035197, 0, -3.821371e-15, 2.3062725e-14, 4.371139e-08, 1, 0, -1, 4.371139e-08, 3.034788, 0.11812775, 5.114235)
+mesh = SubResource("PlaneMesh_p20re")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2" unique_id=1146151308]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D" unique_id=1615062791]
+shape = SubResource("ConcavePolygonShape3D_p20re")
+
+[node name="BoxPhys2" parent="." unique_id=524509072 instance=ExtResource("2_p20re")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.90554154, 0.7447741, -5.522161)
+mass = 4.281
+
+[node name="BoxPhys3" parent="." unique_id=349143680 instance=ExtResource("2_p20re")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0207338, 0.7447741, -5.522161)
+mass = 4.281

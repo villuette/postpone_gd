@@ -1,0 +1,169 @@
+[gd_scene format=3 uid="uid://h0ul8l83pr6k"]
+
+[ext_resource type="Script" uid="uid://bu3vqwo3ej51w" path="res://src/esc_menu.gd" id="1_lwipk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lwipk"]
+bg_color = Color(0.21016532, 0.0068337694, 0.010960172, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.40392157, 0.40392157, 0.40392157, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5m0x8"]
+bg_color = Color(0.86928314, 0, 0.07161432, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tybkg"]
+bg_color = Color(0.080203034, 0.14621186, 0.06124627, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.4045111, 0.40451115, 0.4045111, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a4em4"]
+bg_color = Color(0.5066397, 0.74002016, 0.44136015, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_654h1"]
+bg_color = Color(0.03857476, 0.15217188, 0.1932258, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.40392157, 0.40392157, 0.40392157, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pc08v"]
+bg_color = Color(0.46082896, 0.7212349, 0.8635278, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1309174290]
+
+[node name="HUD" type="Control" parent="." unique_id=1093942972]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="cursor" type="ColorRect" parent="HUD" unique_id=2021030376]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(4, 4)
+mouse_filter = 2
+color = Color(0.94036186, 5.174056e-06, 1.1551381e-06, 1)
+
+[node name="stats" type="VBoxContainer" parent="HUD" unique_id=1080953841]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 31.0
+offset_right = 291.0
+offset_bottom = 134.0
+theme_override_constants/separation = 18
+
+[node name="health" type="ProgressBar" parent="HUD/stats" unique_id=1109186732]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_lwipk")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5m0x8")
+value = 50.0
+show_percentage = false
+
+[node name="stamina" type="ProgressBar" parent="HUD/stats" unique_id=746643720]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_tybkg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_a4em4")
+value = 50.0
+show_percentage = false
+
+[node name="mind" type="ProgressBar" parent="HUD/stats" unique_id=1919401026]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_654h1")
+theme_override_styles/fill = SubResource("StyleBoxFlat_pc08v")
+value = 50.0
+show_percentage = false
+
+[node name="DamageOverlay" type="ColorRect" parent="HUD" unique_id=870707011]
+modulate = Color(0.8509804, 0, 0, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Menu" type="Control" parent="." unique_id=267501315]
+process_mode = 2
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lwipk")
+
+[node name="ColorRect" type="ColorRect" parent="Menu" unique_id=355849645]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.08627451, 0.08627451, 0.08627451, 0.5882353)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu" unique_id=1468932786]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 86.0
+offset_right = 415.0
+offset_bottom = 501.0
