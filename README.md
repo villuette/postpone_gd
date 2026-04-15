@@ -19,10 +19,10 @@
 
 ### Из исходников
 1. Склонируйте репозиторий:
-    ```bash
-    git clone https://github.com/villuette/postpone_gd/
-    cd postpone_gd
-    ```
+	```bash
+	git clone https://github.com/villuette/postpone_gd/
+	cd postpone_gd
+	```
 2. Откройте папку проекта в **Godot Engine**.
 
 ## 🛠 Технологии
