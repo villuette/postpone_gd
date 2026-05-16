@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://b2vaii0b0fe6i"]
+
+[ext_resource type="Script" uid="uid://15pvvq00y7kt" path="res://src/scripts/Inventory.gd" id="1_g64pl"]
+[ext_resource type="PackedScene" uid="uid://md3mla31tmbf" path="res://src/scenes/InventorySlot.tscn" id="3_l6d2i"]
+[ext_resource type="PackedScene" uid="uid://dl187kgfehlns" path="res://src/scenes/ItemPreview.tscn" id="3_v16oj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1uqw1"]
+font_size = 13
+font_color = Color(0.646029, 0.646029, 0.646029, 1)
+
+[node name="Inventory" type="Control" unique_id=771640842]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g64pl")
+total_slots = 54
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=559608913]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 77.0
+offset_right = 391.0
+offset_bottom = 559.0
+columns = 6
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1923976713]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.23921569)
+
+[node name="ItemInfo" type="ColorRect" parent="." unique_id=760622964]
+layout_mode = 0
+offset_left = 809.0
+offset_top = 75.0
+offset_right = 1102.0
+offset_bottom = 363.0
+color = Color(0, 0, 0, 0.39215687)
+
+[node name="MarginContainer" type="MarginContainer" parent="ItemInfo" unique_id=938805203]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -72.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ItemInfo/MarginContainer" unique_id=1020147135]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="ItemInfo/MarginContainer/VBoxContainer" unique_id=602761321]
+layout_mode = 2
+
+[node name="DescLabel" type="Label" parent="ItemInfo/MarginContainer/VBoxContainer" unique_id=176403329]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_1uqw1")
+
+[node name="TextureRect" type="TextureRect" parent="ItemInfo/MarginContainer/VBoxContainer" unique_id=227873644]
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 4
+stretch_mode = 5
+
+[node name="HandSlot" parent="." unique_id=1720966037 instance=ExtResource("3_l6d2i")]
+layout_mode = 0
+anchors_preset = 0
+offset_left = 467.0
+offset_top = 411.0
+offset_right = 615.0
+offset_bottom = 559.0
+slot_type = 1
+
+[node name="ItemPreview" parent="." unique_id=2032416640 instance=ExtResource("3_v16oj")]
+layout_mode = 1
+offset_left = 844.0
+offset_top = 408.0
+offset_right = -108.0
+offset_bottom = -40.0

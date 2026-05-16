@@ -1,17 +1,23 @@
 [gd_scene format=3 uid="uid://md3mla31tmbf"]
 
+[ext_resource type="Script" uid="uid://kx4c7wyuf2a3" path="res://src/scripts/inventory_slot.gd" id="1_0k1cb"]
+
 [node name="InventorySlot" type="PanelContainer" unique_id=1720966037]
 custom_minimum_size = Vector2(50, 50)
 anchors_preset = -1
 offset_right = 23.0
 offset_bottom = 23.0
+script = ExtResource("1_0k1cb")
 
 [node name="Icon" type="TextureRect" parent="." unique_id=2019183300]
 layout_mode = 2
+mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
 
 [node name="CountLabel" type="Label" parent="." unique_id=538285699]
 layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.99043614, 0, 0.38053757, 1)
 horizontal_alignment = 2
 vertical_alignment = 2

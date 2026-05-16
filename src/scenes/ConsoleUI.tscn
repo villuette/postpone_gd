@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://ddeu2fuieomhn"]
+
+[ext_resource type="Script" uid="uid://d3p6gql10beko" path="res://src/scripts/Console.gd" id="1_pow08"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sfbqg"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="Console" type="CanvasLayer" unique_id=726268625 node_paths=PackedStringArray("input_field", "log_label", "panel")]
+layer = 100
+script = ExtResource("1_pow08")
+input_field = NodePath("Panel/Input")
+log_label = NodePath("Panel/Log")
+panel = NodePath("Panel")
+
+[node name="Panel" type="Control" parent="." unique_id=1663124248]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 452.0
+grow_horizontal = 2
+
+[node name="ColorRect" type="ColorRect" parent="Panel" unique_id=539439094]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.87058824)
+
+[node name="Input" type="LineEdit" parent="Panel" unique_id=143596750]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -6.119995
+offset_bottom = 24.880005
+grow_horizontal = 2
+grow_vertical = 0
+rotation = -0.00021347294
+theme_override_styles/focus = SubResource("StyleBoxFlat_sfbqg")
+deselect_on_focus_loss_enabled = false
+
+[node name="Log" type="RichTextLabel" parent="Panel" unique_id=855445122]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 62.0
+offset_right = -104.0
+offset_bottom = 420.0
+grow_horizontal = 2
+focus_mode = 0
+scroll_following = true
+
+[connection signal="text_submitted" from="Panel/Input" to="." method="_on_line_edit_text_submitted"]

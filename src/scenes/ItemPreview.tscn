@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dl187kgfehlns"]
+
+[ext_resource type="Script" uid="uid://b2gyqddcpq70r" path="res://src/scripts/PreviewItemPanel.gd" id="1_cp3h8"]
+
+[node name="ItemPreview" type="Control" unique_id=2032416640]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=2105815097]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cp3h8")
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1448160117]
+own_world_3d = true
+handle_input_locally = false
+size = Vector2i(200, 200)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport" unique_id=787808426]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport" unique_id=1848487281]
+
+[node name="PreviewAnchor" type="Node3D" parent="SubViewportContainer/SubViewport" unique_id=1935423816]

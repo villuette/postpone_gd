@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="BulletData" format=3 uid="uid://cbcttd35gdrwm"]
+
+[ext_resource type="Texture2D" uid="uid://bxo01m6kxx20o" path="res://assets/b79f0d2bc0b4780eea7a99f801fdf06c.jpg" id="1_sjqjw"]
+[ext_resource type="Script" uid="uid://dwdnfsvnix87k" path="res://src/scripts/BulletData.gd" id="2_ffprm"]
+
+[resource]
+script = ExtResource("2_ffprm")
+damage_type = 2
+tracer_color = Color(0.67722625, 0.4559046, 0.9826538, 1)
+title = "Чистая пуля"
+icon = ExtResource("1_sjqjw")
+description = "хз пока не трогал мб и не работает"
+stackable = true
+max_stack = 50
+pickup_stack = 5
+id = "bullet_pure01"
+visual_id = "bullet01"
+metadata/_custom_type_script = "uid://dwdnfsvnix87k"

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://iqqrvcu2xroq"]
+
+[ext_resource type="Script" uid="uid://b32hcmb3liu06" path="res://src/scripts/DialogueComponent.gd" id="1_fv5kd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3spdp"]
+albedo_color = Color(3.465414e-06, 0.7467809, 0.18820557, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3spdp"]
+material = SubResource("StandardMaterial3D_3spdp")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fv5kd"]
+
+[node name="SimpleDialogueableBox" type="StaticBody3D" unique_id=1849777115]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=80532218]
+mesh = SubResource("BoxMesh_3spdp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=105166269]
+shape = SubResource("BoxShape3D_fv5kd")
+
+[node name="DialogueComponent" type="Node" parent="." unique_id=1249286229]
+script = ExtResource("1_fv5kd")
+metadata/_custom_type_script = "uid://b32hcmb3liu06"

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://cid4fbpq1y15i"]
+
+[ext_resource type="Script" uid="uid://bqbmgh3r6yahs" path="res://src/scripts/ItemData.gd" id="1_ru47s"]
+[ext_resource type="Script" uid="uid://82dfew5rm6hh" path="res://src/scripts/effect_healing.gd" id="1_ubaev"]
+[ext_resource type="Texture2D" uid="uid://do8gi3t0gpudf" path="res://assets/Аптечка автомобильная Стандарт Lite с мягким бортом пустая.jpeg" id="1_vcnd1"]
+
+[sub_resource type="Resource" id="Resource_cn4cv"]
+script = ExtResource("1_ubaev")
+metadata/_custom_type_script = "uid://82dfew5rm6hh"
+
+[resource]
+script = ExtResource("1_ru47s")
+id = "heal_hp01"
+title = "Хилка (ХП)"
+icon = ExtResource("1_vcnd1")
+description = "простая хилка хп, по аналогии другие хилки делаются"
+stackable = true
+max_stack = 3
+effect = SubResource("Resource_cn4cv")
+visual_id = "healbox01"
+metadata/_custom_type_script = "uid://bqbmgh3r6yahs"

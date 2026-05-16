@@ -11,6 +11,12 @@ export_preset.cfg
 build/
 bin/
 
+# аддоны
+addons/
+
+# ассеты
+assets/
+
 # Python/uv (если есть скрипты автоматизации)
 __pycache__/
 .venv/

@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://2ka676m4upge"]
+
+[ext_resource type="Script" uid="uid://d36dqav75g6sp" path="res://src/scripts/PickableComponent.gd" id="1_3fo7n"]
+[ext_resource type="Resource" uid="uid://cid4fbpq1y15i" path="res://src/resources/items/heal_hp01.tres" id="2_8p487"]
+[ext_resource type="Script" uid="uid://df1mbedt1wbbf" path="res://src/scripts/PhysicsCollision.gd" id="3_8p487"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_heuh2"]
+albedo_color = Color(0.9040645, 0, 0.37164053, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_h4vvm"]
+material = SubResource("StandardMaterial3D_heuh2")
+size = Vector3(0.13, 0.28, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y1gxu"]
+size = Vector3(0.4234619, 0.5784912, 1.1694336)
+
+[node name="HealboxView" type="Node3D" unique_id=311570482]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=606003213]
+mesh = SubResource("BoxMesh_h4vvm")
+
+[node name="PickableComponent" type="Node" parent="." unique_id=897220290]
+script = ExtResource("1_3fo7n")
+item_data = ExtResource("2_8p487")
+hover_name = "аптечка"
+metadata/_custom_type_script = "uid://d36dqav75g6sp"
+
+[node name="PhysicsCollision" type="CollisionShape3D" parent="." unique_id=1817435399]
+transform = Transform3D(0.53353083, 0, 0, 0, 0.53353083, 0, 0, 0, 0.53353083, -0.00530795, -0.0005535893, -0.008727189)
+shape = SubResource("BoxShape3D_y1gxu")
+script = ExtResource("3_8p487")
+metadata/_custom_type_script = "uid://df1mbedt1wbbf"

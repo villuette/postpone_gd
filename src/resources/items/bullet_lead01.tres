@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="BulletData" format=3 uid="uid://5fuuvluqkodl"]
+
+[ext_resource type="Texture2D" uid="uid://b47io4n27nifh" path="res://assets/a8bd7e1c1cea680d43cfe2147dfb2ed0.jpg" id="1_im01w"]
+[ext_resource type="Script" uid="uid://dwdnfsvnix87k" path="res://src/scripts/BulletData.gd" id="2_xibia"]
+
+[resource]
+script = ExtResource("2_xibia")
+base_damage = 50.0
+tracer_color = Color(0.712052, 0.4958846, 0.3085189, 1)
+id = "bullet_lead01"
+title = "Свинцовые пули"
+icon = ExtResource("1_im01w")
+description = "пули щас для теста ток они норм"
+stackable = true
+max_stack = 30
+pickup_stack = 10
+visual_id = "bullet01"
+metadata/_custom_type_script = "uid://dwdnfsvnix87k"

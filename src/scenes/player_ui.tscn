@@ -1,7 +1,10 @@
 [gd_scene format=3 uid="uid://h0ul8l83pr6k"]
 
-[ext_resource type="Script" uid="uid://bu3vqwo3ej51w" path="res://src/esc_menu.gd" id="1_lwipk"]
-[ext_resource type="PackedScene" uid="uid://b2vaii0b0fe6i" path="res://src/Inventory.tscn" id="2_tavnm"]
+[ext_resource type="Script" uid="uid://bu3vqwo3ej51w" path="res://src/scripts/esc_menu.gd" id="1_lwipk"]
+[ext_resource type="Script" uid="uid://cp4uorqwto0eg" path="res://src/scripts/player_ui.gd" id="1_u4arh"]
+[ext_resource type="Script" uid="uid://qve0rp5661ow" path="res://src/scripts/hud.gd" id="2_5amjh"]
+[ext_resource type="PackedScene" uid="uid://b2vaii0b0fe6i" path="res://src/scenes/Inventory.tscn" id="2_tavnm"]
+[ext_resource type="Script" uid="uid://4y2v2kfoy85t" path="res://src/scripts/StatsBarUpdater.gd" id="2_yeqyw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lwipk"]
 bg_color = Color(0.21016532, 0.0068337694, 0.010960172, 1)
@@ -72,9 +75,16 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[node name="CanvasLayer" type="CanvasLayer" unique_id=1309174290]
+[sub_resource type="LabelSettings" id="LabelSettings_8tlj4"]
 
-[node name="HUD" type="Control" parent="." unique_id=1093942972]
+[node name="UI_Manager" type="CanvasLayer" unique_id=1309174290 node_paths=PackedStringArray("esc_menu", "inventory", "hud", "stats")]
+script = ExtResource("1_u4arh")
+esc_menu = NodePath("Menu")
+inventory = NodePath("Inventory")
+hud = NodePath("HUD")
+stats = NodePath("HUD/stats")
+
+[node name="HUD" type="Control" parent="." unique_id=1093942972 node_paths=PackedStringArray("subtitles_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -82,6 +92,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("2_5amjh")
+subtitles_label = NodePath("SubtitlesLabel")
 
 [node name="cursor" type="ColorRect" parent="HUD" unique_id=2021030376]
 layout_mode = 1
@@ -107,6 +119,7 @@ offset_top = 31.0
 offset_right = 291.0
 offset_bottom = 134.0
 theme_override_constants/separation = 18
+script = ExtResource("2_yeqyw")
 
 [node name="health" type="ProgressBar" parent="HUD/stats" unique_id=1109186732]
 layout_mode = 2
@@ -142,6 +155,45 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="InteractionLabel" type="Label" parent="HUD" unique_id=1564789139]
+layout_mode = 0
+offset_left = 410.0
+offset_top = 495.0
+offset_right = 695.0
+offset_bottom = 590.0
+label_settings = SubResource("LabelSettings_8tlj4")
+
+[node name="predictive_crosshair" type="ColorRect" parent="HUD" unique_id=1455919218]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(4, 4)
+mouse_filter = 2
+color = Color(0.55174226, 0.5027891, 0.30484423, 1)
+
+[node name="SubtitlesLabel" type="Label" parent="HUD" unique_id=1057330670]
+layout_mode = 0
+offset_left = 351.0
+offset_top = 60.0
+offset_right = 772.0
+offset_bottom = 203.0
+
+[node name="WeaponHudPlaceholder" type="Control" parent="HUD" unique_id=1627779475]
+anchors_preset = 0
+offset_left = 114.0
+offset_top = 448.0
+offset_right = 114.0
+offset_bottom = 448.0
+
 [node name="Menu" type="Control" parent="." unique_id=267501315]
 process_mode = 2
 visible = false
@@ -170,4 +222,3 @@ offset_right = 415.0
 offset_bottom = 501.0
 
 [node name="Inventory" parent="." unique_id=771640842 instance=ExtResource("2_tavnm")]
-visible = false

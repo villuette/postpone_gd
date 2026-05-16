@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bfj7mpxe4b2qo"]
+
+[ext_resource type="Texture2D" uid="uid://bwkw8xyviyrdj" path="res://assets/Engraved Smith & Wesson No_ 3 American Revolver.jpeg" id="1_g5y4j"]
+[ext_resource type="Script" uid="uid://bqbmgh3r6yahs" path="res://src/scripts/ItemData.gd" id="2_xaunt"]
+
+[resource]
+script = ExtResource("2_xaunt")
+id = "revolver01"
+title = "револьвер"
+icon = ExtResource("1_g5y4j")
+description = "тупо ревик хз чо писать (красивый)"
+actions = Array[int]([2, 3, 1])
+id = "revolver01"
+visual_id = "revolver01"
+metadata/_custom_type_script = "uid://bqbmgh3r6yahs"
